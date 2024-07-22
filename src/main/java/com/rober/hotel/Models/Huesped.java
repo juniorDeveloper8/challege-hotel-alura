@@ -28,6 +28,7 @@ public class Huesped {
     private Date fechaN;
     private String documento;
 
+    @Column(columnDefinition = "TINYINT(1)" )
     private boolean activo;
 
     @Enumerated(EnumType.STRING)

@@ -5,11 +5,7 @@ import java.sql.Date;
 import com.rober.hotel.DTO.DTORESERVA.DatosActualizarReserva;
 import com.rober.hotel.DTO.DTORESERVA.DatosRegistroReserva;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -39,6 +35,7 @@ public class Reservas {
     /**
      * manejo de estados
      */
+    @Column(columnDefinition = "TINYINT(1)" )
     private boolean activo;
 
     /**

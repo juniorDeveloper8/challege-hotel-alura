@@ -4,16 +4,12 @@ import java.util.Collection;
 import java.util.List;
 
 import com.rober.hotel.DTO.DTOUSER.DatosRegistroUserLogin;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -33,6 +29,7 @@ public class Usuarios implements UserDetails {
   private Long id;
   private String login;
   private String clave;
+  @Column(columnDefinition = "TINYINT(1)" )
   private boolean activo;
 
   @Override
