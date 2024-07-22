@@ -1,0 +1,48 @@
+package com.rober.hotel.Config;
+
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.info.License;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import io.swagger.v3.oas.annotations.servers.Server;
+import org.springframework.http.HttpHeaders;
+
+@OpenAPIDefinition(
+        info = @Info(
+                title = "Api reservas de hotel",
+                description = "aplicacion de cuarto de hotel",
+                version = "1.0.0",
+                contact = @Contact(
+                        name = "Roberth Zambrano",
+                        url = "https://github.com/juniorDeveloper8/",
+                        email = "oscuridadd38@gmail.com"
+                ),
+                license = @License(
+                        name = "copyleft"
+                )
+        ),
+        servers = {
+                @Server(
+                        description = "DEV SERVER",
+                        url = "http://localhost:8080"
+                )
+        },
+        security = @SecurityRequirement(
+                name = "Security Token"
+        )
+)
+@SecurityScheme(
+        name = "Security Token",
+        description = "Access Token For My Api",
+        type = SecuritySchemeType.HTTP,
+        paramName = HttpHeaders.AUTHORIZATION,
+        in = SecuritySchemeIn.HEADER,
+        scheme = "bearer",
+        bearerFormat = "JWT"
+)
+public class SwaggerConfig {
+}

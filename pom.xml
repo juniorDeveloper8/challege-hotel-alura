@@ -14,7 +14,7 @@
 	<name>hotel</name>
 	<description>crud de reservas</description>
 	<properties>
-		<java.version>20</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -35,29 +35,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<!--dependencias de karate para automatizar pruebas-->
-		<dependency>
-    		<groupId>com.intuit.karate</groupId>
-    		<artifactId>karate-junit5</artifactId>
-    		<version>1.4.0</version>
-    		<scope>test</scope>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/com.intuit.karate/karate-core -->
-		<dependency>
-    		<groupId>com.intuit.karate</groupId>
-    		<artifactId>karate-core</artifactId>
-    		<version>1.4.1.RC3</version>
-		</dependency>
-
-		<!--dependencias de karate para automatizar pruebas-->
-
-		<dependency>
-   			<groupId>jakarta.validation</groupId>
-    		<artifactId>jakarta.validation-api</artifactId>
-    		<version>3.0.0</version> <!-- Reemplaza esto con la versión actual -->
 		</dependency>
 
 		<dependency>
@@ -82,15 +59,34 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>com.auth0</groupId>
 			<artifactId>java-jwt</artifactId>
 			<version>4.2.1</version>
+		</dependency>
+<!--
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-mysql</artifactId>
+		</dependency>
+
+		-->
+		<!--para la doc -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.5.0</version>
 		</dependency>
 	</dependencies>
 
@@ -104,14 +100,5 @@
 	</build>
 
 </project>
-		<!--
-			deconmentan esto por si decean hacer las migraciones em ves de usar hibernate
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-mysql</artifactId>
-		</dependency>
-		-->
+
+

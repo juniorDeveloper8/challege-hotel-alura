@@ -8,9 +8,9 @@ Este challenge trata de una api diseñada para simplificar y agilizar el proceso
 
 ## Capturas
 
-![cueris](./doc/cueris%20en%20postman.png)
+![cueris](./doc/cueris.png)
 
-![docker](./doc/base%20en%20docker.png)
+![docker](./doc/docker.png)
 
 ![base](./doc/alura.png)
 
@@ -43,11 +43,8 @@ Intalación de docker:
 
 Para el lebantamiento de la base en docker tiene la documetacione [Aqui](https://hub.docker.com/_/mysql)
 
-## karate framewor
-Para usar karate con spring:
-- karate [doc](https://github.com/karatelabs/karate)
-- uso [doc](https://semaphoreci.com/community/tutorials/testing-a-java-spring-boot-rest-api-with-karate)
-- por si aun queda dudas [doc](https://www.baeldung.com/karate-rest-api-testing)
+## Swagger Doc
+ - http://localhost:8080/swagger-ui/index.html#/
 
 ## Instalación
 
