@@ -62,6 +62,7 @@ public class LoginController {
         Usuarios usuario = Usuarios.builder()
                 .login(datosRegistroUserLogin.login())
                 .clave(claveEncriptada) // Guardar la contraseña encriptada
+                .activo(true)
                 .build();
 
         // Guardar el usuario en la base de datos

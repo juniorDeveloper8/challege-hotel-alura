@@ -53,6 +53,7 @@ public class UsuariosController {
                 huesped.getApe(),
                 huesped.getPhone(),
                 huesped.getNacionalidad().toString(),
+
                 huesped.getFechaN());
 
         URI url = uriComponentsBuilder.path("/users/{id}").buildAndExpand(huesped.getId()).toUri();
