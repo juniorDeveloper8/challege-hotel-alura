@@ -31,7 +31,6 @@ Enumera las principales características de tu aplicación:
 - Postman
 - Docker
 - Vscode IDE para desarrollo
-- Karate framework
 
 ## Docker compose
 
