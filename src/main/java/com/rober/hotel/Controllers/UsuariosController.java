@@ -81,7 +81,7 @@ public class UsuariosController {
      * @param datosActualizarHuesped
      * @return
      */
-    @PutMapping
+    @PutMapping("/{id}")
     @Transactional
     public ResponseEntity actualizarHuesped(@RequestBody DatosActualizarHuesped datosActualizarHuesped) {
         Huesped huesped = huespedInterface.getReferenceById(datosActualizarHuesped.id());
@@ -96,7 +96,7 @@ public class UsuariosController {
     }
 
     /**
-     * elminamos de forma logica al huesped q no deveria pero bueno
+     * elminamos de forma logica al huesped de forma logica
      * 
      * @param id
      * @return

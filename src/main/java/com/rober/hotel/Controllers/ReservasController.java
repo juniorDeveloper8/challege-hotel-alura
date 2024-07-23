@@ -76,7 +76,7 @@ public class ReservasController {
      * @param datosActualizarReserva
      * @return
      */
-    @PutMapping
+    @PutMapping("/{id}")
     @Transactional
     public ResponseEntity actulizarReserva(@RequestBody DatosActualizarReserva datosActualizarReserva) {
         Reservas reservas = reservaInterface.getReferenceById(datosActualizarReserva.id());
