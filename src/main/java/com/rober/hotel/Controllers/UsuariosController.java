@@ -42,6 +42,11 @@ public class UsuariosController {
     @PostMapping
     public ResponseEntity<DatosRespuestaHuesped> registrarHuespedes(
             @RequestBody DatosRegistroHuesped datosRegistroHuesped, UriComponentsBuilder uriComponentsBuilder) {
+
+        if (datosRegistroHuesped.nom().isBlank() || datosRegistroHuesped.ape().isBlank() || datosRegistroHuesped.documento().isBlank() || datosRegistroHuesped.phone().isBlank() || datosRegistroHuesped.nacionalidad() == null || datosRegistroHuesped.fechaN() == null ) {
+            return ResponseEntity.badRequest().build();
+        }
+
         Huesped huesped = huespedInterface.save(new Huesped(datosRegistroHuesped));
         DatosRespuestaHuesped datosRespuestaHuesped = new DatosRespuestaHuesped(
 
@@ -81,6 +86,11 @@ public class UsuariosController {
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity actualizarHuesped(@RequestBody DatosActualizarHuesped datosActualizarHuesped) {
+        // Verificar que los campos nom y ape no estén vacíos
+        if (datosActualizarHuesped.nom().isBlank() || datosActualizarHuesped.ape().isBlank()) {
+            return ResponseEntity.badRequest().build();
+        }
+
         Huesped huesped = huespedInterface.getReferenceById(datosActualizarHuesped.id());
         huesped.actualizarDatos(datosActualizarHuesped);
         return ResponseEntity.ok(new DatosRespuestaActualizarHuesped(
