@@ -4,6 +4,7 @@ Feature: Pruebas para registrar huéspedes
 
   Background:
     * configure headers = { 'Content-Type': 'application/json' }
+    * header Authorization = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlckB0ZXN0LmNvbSIsImlzcyI6InZvbGwgbWVkIiwiaWQiOjEsImV4cCI6MTcyMTg4NTI5N30.XPB8OYMKo9Z_Mzh5xepWPtxl20S0Amrb4wlaR8d9tc8'
 
   Scenario Outline: Registrar un nuevo huésped exitosamente
     Given url "http://localhost:8080"
@@ -19,7 +20,6 @@ Feature: Pruebas para registrar huéspedes
         "fechaN": "<fechaN>"
       }
       """
-    And header Authorization = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlckB0ZXN0LmNvbSIsImlzcyI6InZvbGwgbWVkIiwiaWQiOjEsImV4cCI6MTcyMTg5MjE3Mn0.R-6dsWhj2Om8HRtrThqssMr0X1ykJplkaUMXdZfd8Tg'
     When method post
     Then status 201
   #  And match response ==
@@ -56,3 +56,24 @@ Feature: Pruebas para registrar huéspedes
       """
     When method post
     Then status 403
+
+  Scenario Outline: Error al registrar con campos basios
+    Given url "http://localhost:8080"
+    And path "/users"
+    And request
+      """
+      {
+        "nom": "<nombre>",
+        "ape": "<apellido>",
+        "phone": "<telefono>",
+        "documento": "<documento>",
+        "nacionalidad": "<nacionalidad>",
+        "fechaN": "<fechaN>"
+      }
+      """
+    When method post
+    Then status 403
+    Examples:
+      | nombre | apellido | telefono   | documento  | nacionalidad | fechaN     |
+      | Jose   |          | 7894657896 | 8529517410 | Ecuatoriano  | 2005-06-30 |
+      |        | masha    | 7894657896 |            | Ecuatoriano  | 2005-06-30 |
