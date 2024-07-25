@@ -57,9 +57,6 @@ public class Huesped {
         if (datosActualizarHuesped.ape() != null) {
             this.ape = datosActualizarHuesped.ape();
         }
-        if (datosActualizarHuesped.fechaN() != null) {
-            this.fechaN = datosActualizarHuesped.fechaN();
-        }
     }
 
     // eliminar

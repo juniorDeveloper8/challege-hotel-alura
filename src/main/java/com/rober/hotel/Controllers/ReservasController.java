@@ -48,7 +48,6 @@ public class ReservasController {
         Reservas reservas = reservaInterface.save(new Reservas(datosRegistroReserva));
         DatosRespuestaReserva datosRespuestaReserva = new DatosRespuestaReserva(
                 // esto o retorna 200 o 201 para decir qsalio todo bien
-                reservas.getId(),
                 reservas.getFechaEntrada(),
                 reservas.getFechaSalida(),
                 reservas.getFormaP(),
@@ -82,7 +81,6 @@ public class ReservasController {
         Reservas reservas = reservaInterface.getReferenceById(datosActualizarReserva.id());
         reservas.actualizarDatosReserva(datosActualizarReserva);
         return ResponseEntity.ok(new DatosRespuestaReserva(
-                reservas.getId(),
                 reservas.getFechaEntrada(),
                 reservas.getFechaSalida(),
                 reservas.getFormaP(),
@@ -98,7 +96,6 @@ public class ReservasController {
     public ResponseEntity<DatosRespuestaReserva> retornarDatosReserva(@PathVariable Integer id) {
         Reservas reservas = reservaInterface.getReferenceById(id);
         var datosReserva = new DatosRespuestaReserva(
-                reservas.getId(),
                 reservas.getFechaEntrada(),
                 reservas.getFechaSalida(),
                 reservas.getFormaP(),

@@ -8,6 +8,5 @@ public record DatosActualizarHuesped(
     @NotNull
     Integer id,
     String nom,
-    String ape,
-    Date fechaN
+    String ape
 ) {}

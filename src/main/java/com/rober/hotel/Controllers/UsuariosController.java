@@ -2,6 +2,7 @@ package com.rober.hotel.Controllers;
 
 import java.net.URI;
 
+import com.rober.hotel.DTO.*;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,10 +21,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import jakarta.transaction.Transactional;
 
-import com.rober.hotel.DTO.DatosActualizarHuesped;
-import com.rober.hotel.DTO.DatosListarHuesped;
-import com.rober.hotel.DTO.DatosRegistroHuesped;
-import com.rober.hotel.DTO.DatosRespuestaHuesped;
 import com.rober.hotel.Interfaces.HuespedInterface;
 import com.rober.hotel.Models.Huesped;
 
@@ -47,14 +44,14 @@ public class UsuariosController {
             @RequestBody DatosRegistroHuesped datosRegistroHuesped, UriComponentsBuilder uriComponentsBuilder) {
         Huesped huesped = huespedInterface.save(new Huesped(datosRegistroHuesped));
         DatosRespuestaHuesped datosRespuestaHuesped = new DatosRespuestaHuesped(
-                // este tiene q retornar 201 que significa creado
-                huesped.getId(),
+
                 huesped.getNom(),
                 huesped.getApe(),
-                huesped.getPhone(),
-                huesped.getNacionalidad().toString(),
-
-                huesped.getFechaN());
+                huesped.getDocumento(),
+                huesped.getPhone().toString(),
+                huesped.getNacionalidad(),
+                huesped.getFechaN()
+        );
 
         URI url = uriComponentsBuilder.path("/users/{id}").buildAndExpand(huesped.getId()).toUri();
         return ResponseEntity.created(url).body(datosRespuestaHuesped);
@@ -86,13 +83,10 @@ public class UsuariosController {
     public ResponseEntity actualizarHuesped(@RequestBody DatosActualizarHuesped datosActualizarHuesped) {
         Huesped huesped = huespedInterface.getReferenceById(datosActualizarHuesped.id());
         huesped.actualizarDatos(datosActualizarHuesped);
-        return ResponseEntity.ok(new DatosRespuestaHuesped(
-                huesped.getId(),
+        return ResponseEntity.ok(new DatosRespuestaActualizarHuesped(
                 huesped.getNom(),
-                huesped.getApe(),
-                huesped.getPhone(),
-                huesped.getNacionalidad().toString(),
-                huesped.getFechaN()));
+                huesped.getApe().toString())
+        );
     }
 
     /**
@@ -119,11 +113,11 @@ public class UsuariosController {
     public ResponseEntity<DatosRespuestaHuesped> retornarDatosHuesped(@PathVariable Integer id) {
         Huesped huesped = huespedInterface.getReferenceById(id);
         var datosHuesped = new DatosRespuestaHuesped(
-                huesped.getId(),
                 huesped.getNom(),
                 huesped.getApe(),
-                huesped.getPhone(),
-                huesped.getNacionalidad().toString(),
+                huesped.getDocumento(),
+                huesped.getPhone().toString(),
+                huesped.getNacionalidad(),
                 huesped.getFechaN());
         return ResponseEntity.ok(datosHuesped);
     }

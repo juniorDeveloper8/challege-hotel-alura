@@ -1,15 +1,17 @@
 package com.rober.hotel.DTO;
 
+import com.rober.hotel.Models.Nacionalidad;
+
 import java.sql.Date;
 
-
 public record DatosRespuestaHuesped(
-    Integer id,
     String nom,
     String ape,
-    String phone,
     String documento,
+    String phone,
+    Nacionalidad nacionalidad,
     Date fechaN
-) {}
+) {
+}
 
     
