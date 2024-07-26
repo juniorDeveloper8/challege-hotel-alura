@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public record DatosRespuestaReserva(
     Date fechaEntrada,
-    Date fechaSAlida,
+    Date fechaSalida,
     String formaP,
     String valor
 ) {}

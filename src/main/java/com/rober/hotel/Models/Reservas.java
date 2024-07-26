@@ -26,7 +26,9 @@ public class Reservas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "fecha_entrada")
     private Date fechaEntrada;
+    @Column(name = "fecha_salida")
     private Date fechaSalida;
     private String valor;
     private String formaP;
@@ -44,8 +46,8 @@ public class Reservas {
      */
     public Reservas(DatosRegistroReserva datosRegistroReserva) {
         this.activo = true;
-        this.fechaEntrada = datosRegistroReserva.fehaEntrada();
-        this.fechaSalida = datosRegistroReserva.fehaSalida();
+        this.fechaEntrada = datosRegistroReserva.fechaEntrada();
+        this.fechaSalida = datosRegistroReserva.fechaSalida();
         this.valor = datosRegistroReserva.valor();
         this.formaP = datosRegistroReserva.formaP();
     }

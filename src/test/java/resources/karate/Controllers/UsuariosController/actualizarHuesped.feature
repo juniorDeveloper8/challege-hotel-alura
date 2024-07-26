@@ -5,7 +5,7 @@ Feature: Actualización de datos de huésped
   Background:
     * url 'http://localhost:8080'
     * configure headers = { 'Content-Type': 'application/json' }
-    * header Authorization = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlckB0ZXN0LmNvbSIsImlzcyI6InZvbGwgbWVkIiwiaWQiOjEsImV4cCI6MTcyMTg4NTI5N30.XPB8OYMKo9Z_Mzh5xepWPtxl20S0Amrb4wlaR8d9tc8'
+    * header Authorization = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlckB0ZXN0LmNvbSIsImlzcyI6InZvbGwgbWVkIiwiaWQiOjEsImV4cCI6MTcyMjAyODc0NX0.08tWrvmvDQQQ2qYDHza2t2mWek5XrpCndkAK6gyxw0o'
 
   Scenario Outline: Actualizar datos de un huésped existente solo nombres y apellido y comparar junto con los otros datos
     Given def id = <id>

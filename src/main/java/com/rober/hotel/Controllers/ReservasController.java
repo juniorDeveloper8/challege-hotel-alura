@@ -1,14 +1,13 @@
 package com.rober.hotel.Controllers;
 
 import java.net.URI;
+import java.util.List;
 
+import io.micrometer.common.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
-import org.springframework.data.web.PageableDefault;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +36,7 @@ public class ReservasController {
 
     /**
      * encapsulamos paro no exponer nuestro modelo y guradamo la reserva
-     * 
+     *
      * @param datosRegistroReserva
      * @param uriComponentsBuilder
      * @return
@@ -45,39 +44,65 @@ public class ReservasController {
     @PostMapping
     public ResponseEntity<DatosRespuestaReserva> registroReserva(
             @RequestBody DatosRegistroReserva datosRegistroReserva, UriComponentsBuilder uriComponentsBuilder) {
+
+        if (datosRegistroReserva.fechaEntrada() == null ||
+                datosRegistroReserva.fechaSalida() == null ||
+                datosRegistroReserva.fechaSalida().compareTo(datosRegistroReserva.fechaEntrada()) <= 0 ||
+                StringUtils.isBlank(datosRegistroReserva.formaP()) ||
+                StringUtils.isBlank(datosRegistroReserva.valor())) {
+
+            return ResponseEntity.badRequest().build();
+        }
+
         Reservas reservas = reservaInterface.save(new Reservas(datosRegistroReserva));
         DatosRespuestaReserva datosRespuestaReserva = new DatosRespuestaReserva(
                 // esto o retorna 200 o 201 para decir qsalio todo bien
                 reservas.getFechaEntrada(),
                 reservas.getFechaSalida(),
                 reservas.getFormaP(),
-                reservas.getValor());
+                reservas.getValor().toString());
 
-        URI url = uriComponentsBuilder.path("/reservation/{id}").buildAndExpand(reservas.getId()).toUri();
+        URI url = uriComponentsBuilder.path("/reservation").buildAndExpand(reservas.getId()).toUri();
         return ResponseEntity.created(url).body(datosRespuestaReserva);
     }
 
     /**
      * litando datos de reservas activas
-     * 
-     * @param pagination
+     *
      * @return
      */
     @GetMapping
-    public ResponseEntity<Page<DatosListarReserva>> listarReserva(@PageableDefault(size = 5) Pageable pagination) {
-
-        return ResponseEntity.ok(reservaInterface.findByActivoTrue(pagination).map(DatosListarReserva::new));
+    public ResponseEntity<?> listarReserva() {
+        List<DatosListarReserva> datosListarReservaList = reservaInterface.findByActivoTrue()
+                .stream().map(reservas -> DatosListarReserva.builder()
+                        .id(reservas.getId())
+                        .fechaEntrada(reservas.getFechaEntrada())
+                        .fechaSalida(reservas.getFechaSalida())
+                        .formaP(reservas.getFormaP())
+                        .valor(reservas.getValor())
+                        .build())
+                .toList();
+        return ResponseEntity.ok(datosListarReservaList);
     }
 
     /**
      * actulizaicon de la reserva
-     * 
+     *
      * @param datosActualizarReserva
      * @return
      */
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity actulizarReserva(@RequestBody DatosActualizarReserva datosActualizarReserva) {
+    public ResponseEntity<?> actulizarReserva(@RequestBody DatosActualizarReserva datosActualizarReserva, @PathVariable Integer id ) {
+
+        if (datosActualizarReserva.fechaEntrada() == null ||
+                datosActualizarReserva.fechaSalida() == null ||
+                datosActualizarReserva.fechaSalida().compareTo(datosActualizarReserva.fechaEntrada()) <= 0 ||
+                StringUtils.isBlank(datosActualizarReserva.formaP()) ||
+                StringUtils.isBlank(datosActualizarReserva.valor())) {
+
+            return ResponseEntity.badRequest().build();
+        }
         Reservas reservas = reservaInterface.getReferenceById(datosActualizarReserva.id());
         reservas.actualizarDatosReserva(datosActualizarReserva);
         return ResponseEntity.ok(new DatosRespuestaReserva(
@@ -89,6 +114,7 @@ public class ReservasController {
 
     /**
      * listar por id
+     *
      * @param id
      * @return
      */
@@ -100,7 +126,7 @@ public class ReservasController {
                 reservas.getFechaSalida(),
                 reservas.getFormaP(),
                 reservas.getValor());
-        return ResponseEntity.ok(datosReserva);               
+        return ResponseEntity.ok(datosReserva);
     }
 
     @DeleteMapping("/{id}")

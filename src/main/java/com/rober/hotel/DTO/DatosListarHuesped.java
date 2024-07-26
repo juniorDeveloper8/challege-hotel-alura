@@ -3,7 +3,9 @@ package com.rober.hotel.DTO;
 import java.sql.Date;
 
 import com.rober.hotel.Models.Huesped;
+import lombok.Builder;
 
+@Builder
 public record DatosListarHuesped(
     Integer id,
     String nom,

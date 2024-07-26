@@ -6,9 +6,9 @@ import jakarta.validation.constraints.NotBlank;
 
 public record DatosRegistroReserva(
     @NotBlank
-    Date fehaEntrada,
+    Date fechaEntrada,
     @NotBlank
-    Date fehaSalida,
+    Date fechaSalida,
     @NotBlank
     String valor,
     @NotBlank

@@ -3,7 +3,9 @@ package com.rober.hotel.DTO.DTORESERVA;
 import java.sql.Date;
 
 import com.rober.hotel.Models.Reservas;
+import lombok.Builder;
 
+@Builder
 public record DatosListarReserva(
     Integer id,
     Date fechaEntrada,

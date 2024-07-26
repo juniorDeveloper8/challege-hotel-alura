@@ -27,7 +27,9 @@ public class Usuarios implements UserDetails {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  @Column(unique = true)
   private String login;
+  @Column(unique = true)
   private String clave;
   @Column(columnDefinition = "TINYINT(1)" )
   private boolean activo;
