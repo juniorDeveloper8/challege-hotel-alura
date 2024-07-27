@@ -4,7 +4,7 @@ Feature: Pruebas para registrar huéspedes
 
   Background:
     * configure headers = { 'Content-Type': 'application/json' }
-    * header Authorization = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlcnRoQGdtYWlsLmNvbSIsImlzcyI6InZvbGwgbWVkIiwiaWQiOjIsImV4cCI6MTcyMTkzMjkxOH0.Wx1pz-T0FcAdWRuwR47BNenOoixA3MT0VtgNNcxK650'
+    * header Authorization = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlckB0ZXN0LmNvbSIsImlzcyI6InZvbGwgbWVkIiwiaWQiOjMsImV4cCI6MTcyMjExMTg1M30.Kil23-T1XFAbvPnYtsJr21K898wi2CPW8gjRvMRSU48'
 
   Scenario Outline: Registrar un nuevo huésped exitosamente
     Given url "http://localhost:8080"
@@ -40,7 +40,7 @@ Feature: Pruebas para registrar huéspedes
       | María  | López    | 987654321  | 123456789  | Ruso         | 2000-12-11 |
 
 
-  Scenario: Error al registrar un huésped con datos inválidos
+  Scenario: registrar un huésped con datos inválidos
     Given url "http://localhost:8080"
     And path "/users"
     And request

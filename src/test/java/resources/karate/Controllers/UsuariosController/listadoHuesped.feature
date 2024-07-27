@@ -5,7 +5,7 @@ Feature: Pruebas de listado de Huespedes
    Background:
     * url 'http://localhost:8080'
     * configure headers = { 'Content-Type': 'application/json' }
-    * header Authorization = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlcnRoQGdtYWlsLmNvbSIsImlzcyI6InZvbGwgbWVkIiwiaWQiOjIsImV4cCI6MTcyMTkzMDU0MH0._h2NqzDuVNV7gkE0Sf7qb8rBQ8KPd6H2QoGWE-GYLA0'
+    * header Authorization = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlckB0ZXN0LmNvbSIsImlzcyI6InZvbGwgbWVkIiwiaWQiOjMsImV4cCI6MTcyMjExMTg1M30.Kil23-T1XFAbvPnYtsJr21K898wi2CPW8gjRvMRSU48'
 
   Scenario: Obtener listado de huéspedes activos
     Given path "/users"
@@ -24,4 +24,4 @@ Feature: Pruebas de listado de Huespedes
     And def id = 2
     And path "/users/" + id
     When method get
-    Then status 200d
+    Then status 200

@@ -3,12 +3,12 @@ package com.rober.hotel.Controllers;
 import com.rober.hotel.DTO.DTOUSER.DatosRegistroUserLogin;
 import com.rober.hotel.Interfaces.UsuariosInterface;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,12 +24,11 @@ import jakarta.validation.Valid;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping(value = "/login")
 public class LoginController {
-    
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -41,11 +40,18 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity autenticarUsuario(@RequestBody @Valid DatosUsuaroiAutenticacion datosUsuaroiAutenticacion) {
-        Authentication authToken = new UsernamePasswordAuthenticationToken(datosUsuaroiAutenticacion.login(),
-                datosUsuaroiAutenticacion.clave());
-        var usuarioAutenticado = authenticationManager.authenticate(authToken);
-        var JWTtoken = tokenService.generarToken((Usuarios) usuarioAutenticado.getPrincipal());
-        return ResponseEntity.ok(new DatosJWTToken(JWTtoken));
+        try {
+            Authentication authToken = new UsernamePasswordAuthenticationToken(
+                    datosUsuaroiAutenticacion.login(), datosUsuaroiAutenticacion.clave()
+            );
+            var usuarioAutenticado = authenticationManager.authenticate(authToken);
+            var JWTtoken = tokenService.generarToken((Usuarios) usuarioAutenticado.getPrincipal());
+            return ResponseEntity.ok(new DatosJWTToken(JWTtoken));
+        } catch (UsernameNotFoundException e) {
+            throw new UsernameNotFoundException("Usuario no encontrado");
+        } catch (BadCredentialsException e) {
+            throw new BadCredentialsException("Credenciales inválidas");
+        }
     }
 
     @PostMapping(value = "/create")
@@ -78,4 +84,4 @@ public class LoginController {
         return ResponseEntity.created(location).build();
     }
 
- }
+}

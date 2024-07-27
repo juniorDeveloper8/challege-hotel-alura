@@ -94,18 +94,24 @@
         <dependency>
             <groupId>com.intuit.karate</groupId>
             <artifactId>karate-core</artifactId>
-            <version>1.2.0</version>
+            <version>1.4.1</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/com.intuit.karate/karate-junit5 -->
+        <dependency>
+            <groupId>com.intuit.karate</groupId>
+            <artifactId>karate-junit5</artifactId>
+            <version>1.4.1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <testResources>
             <testResource>
-                <directory>src/test/java/resources</directory>
-                <includes>
-                    <include>karate/**</include>
-                </includes>
+                <directory>src/test/java/resources/karate/Controllers</directory>
+<!--                <includes>-->
+<!--                    <include>karate/**</include>-->
+<!--                </includes>-->
                 <excludes>
                     <exclude>**/*.java</exclude>
                 </excludes>
@@ -134,5 +140,3 @@
     </build>
 
 </project>
-
-

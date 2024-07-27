@@ -1,5 +1,6 @@
 package com.rober.hotel.Models.Users;
 
+import java.security.AuthProvider;
 import java.util.Collection;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class Usuarios implements UserDetails {
   private String clave;
   @Column(columnDefinition = "TINYINT(1)" )
   private boolean activo;
+
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
